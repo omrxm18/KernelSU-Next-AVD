@@ -85,7 +85,7 @@ run_on_device() {
     if [ -z "$KMI" ]; then
         echo "[*] Detecting KMI from kernel release..."
         UNAMER=$(uname -r)
-        ANDVER=$(echo "$UNAMER" | grep -o 'android[0-9]\+' || true)
+        ANDVER=$(echo "$UNAMER" | grep -oE 'android[0-9]+' | head -n1 || true)
         KVER=$(echo "$UNAMER" | cut -d'.' -f1,2 || true)
         if [ -n "$ANDVER" ] && [ -n "$KVER" ]; then
             KMI="${ANDVER}-${KVER}"
